@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+    <link rel="stylesheet" href="./../../css/indexstyle.css">
+    <link rel="stylesheet" href="./../../css/secondarypages.css">
+    <script src="./../../js/students_logic.js"></script>
+    <script src="./../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <header id="SecondaryHeader">
+        <div id="Return">
+            <ul id="Main">
+                <li><a class="button" id="HeaderLink" href="./../../admindex.html">Главная</a></li>
+            </ul>
+        </div>
+       
+        <div id="Title">
+            <span><h1>Студенты</h1></span>
+        </div>
+    </header>
+    
+    <div id="MainBlock">
+        <div class="CurrentInBase">
+           <div class="HeadDiv">
+                <h1>Сейчас в базе</h1>
+           </div>
+            
+           <div class="ACDBlock">
+               <div class="Elements">
+                   <h3>Курс студента</h3>
+                    <input type="text" size=2 name="MyCourse">
+               </div>
+               <div class="Elements">
+                   <h3>Группа студента</h3>
+                    <input type="text" size=2 name="MyGroups">
+               </div>
+           </div>
+            
+           <div id="Renew">
+               
+              <button class="ButtonInput" onClick="showStudents()">Обновить данные</button>
+           </div>
+           
+           <div id="Table">
+               
+           </div>
+        </div>
+        <div class="Actions">
+           <div class="HeadDiv">
+                <h1>Действия</h1>
+           </div>
+           <div class="ACDBlock">
+               <div class="HeadDiv">
+                    <h2>Добавить</h2>
+               </div>
+               <div class="Elements">
+                    <input type="text" name="AddName">
+                    <button class="ButtonInput" onClick="addStudents()">Добавить</button>
+               </div>
+           </div>
+           <div class="ACDBlock">
+               <div class="HeadDiv">
+                    <h2>Изменить</h2>
+               </div>
+               <div class="Elements">
+                    <input type="text" name="OldName">
+                    <span>-></span>
+                    <input type="text" name="NewName">
+                    <button class="ButtonInput" onClick="changeStudents()">Изменить</button>
+               </div>
+           </div>
+           <div class="ACDBlock">
+               <div class="HeadDiv">
+                    <h2>Удалить</h2>
+               </div>
+               <div class="Elements">
+                    <input type="text" name="DeleteName">
+                    <button class="ButtonInput" onClick="deleteStudents()">Удалить</button>
+               </div>
+           </div>
+        </div>
+    </div>
+    
+</body>
+</html>
