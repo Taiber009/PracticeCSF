@@ -26,6 +26,31 @@ class Logics
         $this->connector->saveData("UPDATE Students S SET S.Name = ? WHERE S.Name = ? AND S.ID_Groups = (SELECT ID from Groups G where G.ID_Course = (Select ID from Course C where C.Number = ?) AND G.Name = ?)", array($newStudents, $oldStudents,$co, $gr));
     }
 
+	
+	function GetTeacher($login){
+        $arr = $this->connector->getData("SELECT * FROM Teachers WHERE Login=?", array($login));
+        return $arr;
+    }
+	
+	function HashTeacher($hash,$id){
+        $this->connector->saveData("UPDATE Teachers SET Hash= ? WHERE Id= ?", array($hash,$id));
+    }
+	
+	function GetTeachers(){
+        $arr = $this->connector->getData("SELECT * FROM Teachers order by Login", array());
+        return $arr;
+    }
+
+    function AddTeacher($login, $pass){
+        $this->connector->saveData("INSERT INTO Teachers (Login,Password) VALUES (?,?)", array($login,$pass));
+    }
+
+    function DeleteTeacher($login){
+        $this->connector->saveData("DELETE FROM Teachers WHERE Login = ?", array($login));
+    }
+	
+	
+	
     function GetSubjects(){
         $arr = $this->connector->getData("SELECT * FROM Subject order by Name", null);
         return $arr;
@@ -95,6 +120,7 @@ class Logics
         $this->connector->saveData("DELETE FROM Students WHERE 1", null);
         $this->connector->saveData("DELETE FROM Groups WHERE 1", null);
         $this->connector->saveData("DELETE FROM Course WHERE 1", null);
+        $this->connector->saveData("DELETE FROM Teachers WHERE 1", null);
     }
 
 

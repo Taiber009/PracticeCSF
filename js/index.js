@@ -231,3 +231,31 @@ function FillCourseDay(course,group,subject){
     
         xmlhttp.send(body);
 }
+
+
+function LogIn() {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+		    //var lol = this.responseText;
+            //document.getElementById("TableDiv").innerHTML = this.responseText;
+			//this.responseText = "";
+			document.getElementById("Hide").innerHTML = this.responseText;
+			showStudents();
+			this.responseText = "";
+            }
+        };
+
+        var lo = document.getElementsByName("login")[0].value;
+        var pa = document.getElementsByName("password")[0].value;
+
+        xmlhttp.open("GET","./classes/Login/login.php?lo="+ lo+"&pa="+ pa,true);
+		xmlhttp.send();
+    
+}
