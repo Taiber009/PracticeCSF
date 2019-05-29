@@ -15,6 +15,12 @@ include './../Core/Logics.php';
 		{
 			$data = $value;
 		}
+	if($login === "admin" && $data["Password"] === md5(md5($password)))
+    {
+		echo "<div id=\"Index\">
+		<a class=\"button\" id=\"HeaderLink\" href=\"./admindex.html\">Администрирование</a>
+		</div>";
+    }
     if($data["Password"] === md5(md5($password)))
     {
 		echo "<div id=\"Index\">

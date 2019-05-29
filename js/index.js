@@ -35,7 +35,10 @@ function onAjaxSuccess(obj){
         ReloadTable();
 }
 
-function SelectCourse() {   
+function SelectCourse() {
+    document.getElementById("TableDiv").innerHTML = "";
+    StudentClearForAdmin();	
+	
     course = document.getElementById("Course")[document.getElementById("Course").selectedIndex].value;
     
      $.post(
@@ -63,6 +66,9 @@ function SelectCourse() {
 
 function SelectGroup()
 {
+  document.getElementById("TableDiv").innerHTML = "";
+  StudentClearForAdmin();	
+  
   course = document.getElementById("Course")[document.getElementById("Course").selectedIndex].value;
   group = document.getElementById("Group")[document.getElementById("Group").selectedIndex].value;
   
@@ -70,29 +76,6 @@ function SelectGroup()
   showSubjects();
 }
 
-function showSubjects() {        
-     $.post(
-         "./classes/Index/IndexLogic.php",
-     {
-         indexLogic: "getSubjects",
-         arguments: [course,group]
-     },
-     function (obj){
-         var sel = document.getElementById("Subject");
-         while (sel.length > 1) {
-             sel.remove(sel.length-1);
-         }
-         console.log(obj);
-         var myobj = JSON.parse(obj);
-         for(var i = 0; i < myobj.length; i++) {
-             var opt = document.createElement('option');
-             opt.innerHTML = myobj[i]['Name'];
-             opt.value = myobj[i]['Name'];
-             sel.appendChild(opt);
-         }
-     }
-     );
-}
 function showStudents(){
      $.post(
          "./classes/Index/IndexLogic.php",
@@ -102,6 +85,32 @@ function showStudents(){
      },
      function (obj){
          var sel = document.getElementById("Student");
+		 if (sel!=null)
+		 {
+            while (sel.length > 1) {
+                sel.remove(sel.length-1);
+            }
+            console.log(obj);
+            var myobj = JSON.parse(obj);
+            for(var i = 0; i < myobj.length; i++) {
+                var opt = document.createElement('option');
+                opt.innerHTML = myobj[i]['Name'];
+                opt.value = myobj[i]['Name'];
+                sel.appendChild(opt);
+            }
+		 }
+     }
+     );
+}
+function showSubjects() {        
+     $.post(
+         "./classes/Index/IndexLogic.php",
+     {
+         indexLogic: "getSubjects",
+         arguments: [course,group]
+     },
+     function (obj){
+         var sel = document.getElementById("Subject");
          while (sel.length > 1) {
              sel.remove(sel.length-1);
          }
@@ -243,9 +252,6 @@ function LogIn() {
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-		    //var lol = this.responseText;
-            //document.getElementById("TableDiv").innerHTML = this.responseText;
-			//this.responseText = "";
 			document.getElementById("Hide").innerHTML = this.responseText;
 			showStudents();
 			this.responseText = "";
@@ -258,4 +264,12 @@ function LogIn() {
         xmlhttp.open("GET","./classes/Login/login.php?lo="+ lo+"&pa="+ pa,true);
 		xmlhttp.send();
     
+}
+
+function StudentClearForAdmin() {
+         var sel = document.getElementById("Student");
+		 if (sel!=null)
+            while (sel.length > 1) {
+                sel.remove(sel.length-1);
+            }
 }
